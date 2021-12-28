@@ -1,8 +1,6 @@
 
 import tkinter as tk
 import winsound
-from tkinter import font
-
 
 root = tk.Tk()
 root.geometry('1440x700')
