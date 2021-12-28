@@ -327,7 +327,7 @@ def getWinPosition():
                 
 door_Position = getWinPosition()
 
-# 
+# ---------Restart when meet eneymy----------------
 def newlive():
     global grid,LEVEL
     grid = copyArray(ALL_LEVEL[LEVEL-1]['grid'])
