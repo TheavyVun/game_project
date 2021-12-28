@@ -370,7 +370,7 @@ def win():
     canvas.create_text(590,485,text='MENU', font=('serif',22,'bold'), fill='white', tags='menu')
     canvas.create_rectangle(720,460,860,510,fill='orange', outline='')
     canvas.create_text(790,485,text='Next', font=('serif',22,'bold'), fill='white', tags='next')
-    winsound.PlaySound('sound\\win.wav', winsound.SND_ASYNC | winsound.SND_ASYNC)
+    winsound.PlaySound('sound\\win.wav', winsound.SND_ASYNC)
     canvas.tag_bind('next', '<Button-1>',next_level)
     canvas.tag_bind('menu', '<Button-1>',menu)
 
@@ -389,7 +389,7 @@ def next_level(event):
 # ----------Lost Lives-----------------------------
 def lose_lives():
     global PLAYER_LIFE
-    winsound.PlaySound('sound\\hit.wav',winsound.SND_ASYNC | winsound.SND_ASYNC)
+    winsound.PlaySound('sound\\hit.wav',winsound.SND_ASYNC)
     PLAYER_LIFE -= 1
     if PLAYER_LIFE > 0:
         newlive()
@@ -412,14 +412,14 @@ def move(deltaX, deltaY):
     if not isLose and not isWin:
         if deltaX == 1 and deltaY == 0:
             if playerColumn+1 < len(grid[0]) and grid[playerRow][playerColumn+1] != WALL_CELL :
-                winsound.PlaySound('sound\\scrat.wav',winsound.SND_ASYNC | winsound.SND_ASYNC)
+                winsound.PlaySound('sound\\scrat.wav',winsound.SND_ASYNC)
                 grid[playerRow][playerColumn] = EMPTY_CELL
                 grid[playerRow][playerColumn+1] = PLAYER_CELL
                 
                 if enemy[playerRow][playerColumn+1] == FRUIT_CELL:
                     count_Fruit()
                     enemy[playerRow][playerColumn+1] = 0
-                    winsound.PlaySound('sound\\acon.wav',winsound.SND_ASYNC | winsound.SND_ASYNC)
+                    winsound.PlaySound('sound\\acon.wav',winsound.SND_ASYNC)
 
                 arrayToDrawing()
             if enemy[playerRow][playerColumn+1] == ENEMY_1_CELL or enemy[playerRow][playerColumn+1] == ENEMY_2_CELL or enemy[playerRow][playerColumn+1] == ENEMY_3_CELL or enemy[playerRow][playerColumn+1] == ENEMY_4_CELL:
@@ -430,14 +430,14 @@ def move(deltaX, deltaY):
                    
         elif deltaX == -1 and deltaY == 0:    
             if playerColumn-1 >= 0 and grid[playerRow][playerColumn-1] != WALL_CELL:
-                winsound.PlaySound('sound\\scrat.wav',winsound.SND_ASYNC | winsound.SND_ASYNC)
+                winsound.PlaySound('sound\\scrat.wav',winsound.SND_ASYNC)
                 grid[playerRow][playerColumn] = EMPTY_CELL
                 grid[playerRow][playerColumn-1] = PLAYER_CELL
 
                 if enemy[playerRow][playerColumn-1] == FRUIT_CELL:
                     count_Fruit()
                     enemy[playerRow][playerColumn-1] = EMPTY_CELL
-                    winsound.PlaySound('sound\\acon.wav',winsound.SND_ASYNC | winsound.SND_ASYNC)
+                    winsound.PlaySound('sound\\acon.wav',winsound.SND_ASYNC)
 
                 arrayToDrawing()
             if enemy[playerRow][playerColumn-1] == ENEMY_1_CELL or enemy[playerRow][playerColumn-1] == ENEMY_2_CELL or enemy[playerRow][playerColumn-1] == ENEMY_3_CELL  or enemy[playerRow][playerColumn-1] == ENEMY_4_CELL :
@@ -448,13 +448,13 @@ def move(deltaX, deltaY):
                             
         elif deltaX == 0 and deltaY == 1:  
             if playerRow+1 < len(grid) and grid[playerRow+1][playerColumn] != WALL_CELL :
-                winsound.PlaySound('sound\\scrat.wav',winsound.SND_ASYNC | winsound.SND_ASYNC)
+                winsound.PlaySound('sound\\scrat.wav',winsound.SND_ASYNC)
                 grid[playerRow][playerColumn] = EMPTY_CELL
                 grid[playerRow+1][playerColumn] = PLAYER_CELL
                 if enemy[playerRow+1][playerColumn] == FRUIT_CELL:
                     count_Fruit()
                     enemy[playerRow+1][playerColumn] = EMPTY_CELL
-                    winsound.PlaySound('sound\\acon.wav',winsound.SND_ASYNC | winsound.SND_ASYNC)
+                    winsound.PlaySound('sound\\acon.wav',winsound.SND_ASYNC)
 
                 arrayToDrawing()
             if enemy[playerRow+1][playerColumn] == ENEMY_1_CELL or enemy[playerRow+1][playerColumn] == ENEMY_2_CELL or enemy[playerRow+1][playerColumn] == ENEMY_3_CELL or enemy[playerRow+1][playerColumn] == ENEMY_4_CELL:
@@ -465,13 +465,13 @@ def move(deltaX, deltaY):
                    
         elif deltaX == 0 and deltaY == -1:  
             if playerRow-1 >= 0 and grid[playerRow-1][playerColumn] != WALL_CELL :
-                winsound.PlaySound('sound\\scrat.wav',winsound.SND_ASYNC | winsound.SND_ASYNC)
+                winsound.PlaySound('sound\\scrat.wav',winsound.SND_ASYNC)
                 grid[playerRow][playerColumn] = EMPTY_CELL
                 grid[playerRow-1][playerColumn] = PLAYER_CELL
                 if enemy[playerRow-1][playerColumn] == FRUIT_CELL:
                     count_Fruit()
                     enemy[playerRow-1][playerColumn] = EMPTY_CELL
-                    winsound.PlaySound('sound\\acon.wav',winsound.SND_ASYNC | winsound.SND_ASYNC)
+                    winsound.PlaySound('sound\\acon.wav',winsound.SND_ASYNC)
                 arrayToDrawing()
             if enemy[playerRow-1][playerColumn] == ENEMY_1_CELL or enemy[playerRow-1][playerColumn] == ENEMY_2_CELL or enemy[playerRow-1][playerColumn] == ENEMY_3_CELL or enemy[playerRow-1][playerColumn] == ENEMY_4_CELL:
                 lose_lives()
@@ -504,7 +504,7 @@ def enemyPositions(enemy_P):
             if enemy[i][j] == enemy_P:
                 allPosition = [i,j]
                 return allPosition
-
+# ------Move left and right-------------
 def move_Enemy_1():
     global enemy,move_rignt,PLAYER_LIFE,move_left,isWin,isLose
     if not isWin and not isLose:
@@ -564,7 +564,8 @@ def move_Enemy_2():
         if PLAYER_LIFE>0:
             arrayToDrawing()
             canvas.after(1000,move_Enemy_2)
-
+        
+# ------Move Up and down-----------------------
 def move_Enemy_3():
     global enemy,move_up,PLAYER_LIFE,move_down,isWin,isLose
 
